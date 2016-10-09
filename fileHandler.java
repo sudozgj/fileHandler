@@ -113,6 +113,8 @@ public class fileHandler {
 					String ipcHost = fileHandler.querySql(sql);
 					String clock = fileHandler.getTime(a[2]);
 					String alarmType = a[1];
+					Integer confirm = 0;
+					Integer time = Integer.parseInt(a[3]);
 					String sql1 = "select hostid from hosts where host= '"
 							+ ipcHost + "' ";
 					String hostid = fileHandler.querySql(sql1);
@@ -143,7 +145,7 @@ public class fileHandler {
 //						fileHandler.insetSql(insertSql);
 //					}
 					if (result == null || result.equals("")) {// 判断插入数据是否重复
-						String insertSql = "insert into alarm_tab(deviceType,alarmType,clock,hostid,host,confirm) values('"
+						String insertSql = "insert into alarm_tab(deviceType,alarmType,clock,hostid,host,confirm,time) values('"
 								+ deviceType
 								+ "' ,'"
 								+ alarmType
@@ -153,7 +155,7 @@ public class fileHandler {
 								+ hostid
 								+ "','"
 								+ ipcHost
-								+ "','"+0+"')";
+								+ "','"+confirm+"','"+time+"')";
 						fileHandler.insetSql(insertSql);
 					}
 					if (hostip.equals(a[0].replace(" ", ""))) {// 判断是否是指定的nvr,只提取需要的信息,用于更新录像机的最新数据
